@@ -1,0 +1,55 @@
+{
+  "name": "serverless-zenvia-docs",
+  "version": "1.0.0",
+  "description": "Desenvolvimento do Projeto para Solução do Disparo de Envio de E-mail do Zenvia Docs",
+  "main": "index.js",
+  "scripts": {
+    "start": "serverless offline start",
+    "test:log": "mocha --recursive",
+    "test": "mocha --recursive --require mocha-suppress-logs",
+    "lintWin": "./node_modules/.bin/eslint **/*.js",
+    "lint": "eslint '**/*.js?(x)'",
+    "coverage": "nyc npm run test"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Altu1/serverless-zenvia-docs.git"
+  },
+  "author": "Zenvia",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/Altu1/serverless-zenvia-docs/issues"
+  },
+  "homepage": "https://github.com/Altu1/serverless-zenvia-docs#readme",
+  "dependencies": {
+    "@azure/identity": "^2.1.0",
+    "@azure/storage-blob": "^12.11.0",
+    "@azure/storage-file-share": "^12.11.0",
+    "@sendgrid/mail": "^7.7.0",
+    "aws-sdk": "^2.1218.0",
+    "aws-sdk-client-mock": "^2.0.1",
+    "aws-sdk-mock": "^5.8.0",
+    "axios": "^0.27.2",
+    "chai": "^4.3.6",
+    "chai-http": "^4.3.0",
+    "crypto": "^1.0.1",
+    "date-fns": "^2.29.3",
+    "eslint-plugin-mocha": "^10.1.0",
+    "joi": "^17.7.0",
+    "mocha": "^10.0.0",
+    "mock-data": "^1.5.5",
+    "nock": "^13.3.0",
+    "nyc": "^15.1.0",
+    "serverless": "^3.23.0",
+    "yup": "^0.32.11"
+  },
+  "devDependencies": {
+    "eslint": "^8.24.0",
+    "eslint-config-airbnb-base": "^15.0.0",
+    "eslint-plugin-import": "^2.26.0",
+    "mocha-suppress-logs": "^0.3.1",
+    "serverless-domain-manager": "^6.1.0",
+    "serverless-offline": "^10.1.0",
+    "serverless-plugin-optimize": "^4.2.1-rc.1"
+  }
+}

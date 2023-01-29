@@ -1,0 +1,43 @@
+service: altu-zenvia-docs
+provider:
+  name: aws
+  iam:
+    role: arn:aws:iam::663434194045:role/ps-serverless-default  
+  endpointType: REGIONAL
+  stage: ref
+  runtime: nodejs14.x
+  region: sa-east-1
+  versionFunctions: false
+  timeout: 30
+  memorySize: 128  
+
+  vpc:
+    securityGroupIds:
+      - sg-1f703c79
+      - sg-8eb3d5e8
+    subnetIds:
+      - subnet-9b5243fc
+      - subnet-8d9886d5
+
+package:
+  exclude:
+    - "lib/phantomjs/phantomjs-linux"
+    - "lib/phantomjs/phantomjs-mac"
+
+functions:
+  - ${file(./services/zenvia-docs/config.yml)}
+
+custom:
+  customDomain:
+    domainName: 'api.altu.com.br'
+    basePath: 'zenvia-docs-ref'
+    stage: ref
+  serverless-offline:
+    host: 127.0.0.1
+    port: 3000
+    noPrependStageInUrl: true
+
+plugins:
+  - serverless-offline
+  - serverless-plugin-optimize
+  - serverless-domain-manager

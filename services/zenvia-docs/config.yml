@@ -1,0 +1,37 @@
+sent-mail-queue:
+  handler: services/zenvia-docs/sent-mail-queue/index.handler
+  environment:
+    client: sent-mail-queue
+    service: sent-mail-queue
+  events:
+    - http:
+        path: zenvia-docs/sent-mail-queue
+        method: POST
+        cors: true
+
+sent-mail:
+  handler: services/zenvia-docs/sent-mail/controller/sent-mail/index.handler
+  environment:
+    client: sent-mail
+    service: sent-mail
+  events:
+    - http:
+        path: zenvia-docs/sent-mail
+        method: POST
+        cors: true
+    - sqs:
+        arn: arn:aws:sqs:sa-east-1:663434194045:zdocs-notification-attachments
+        batchSize: 10
+        maximumBatchingWindow: 60
+        functionResponseType: ReportBatchItemFailures
+
+
+query-mail-sent:
+  handler: services/zenvia-docs/query-mail-sent/controller/query-mail-sent/index.handler
+  environment:
+    client: query-mail-sent
+    service: query-mail-sent
+  events:
+    - http:
+        path: zenvia-docs/query-mail-sent
+        method: GET
