@@ -4,7 +4,7 @@ const BodyRepository = require("./repositories/body-repository");
 const { schema } = require("./repositories/body-schema");
 const bodyValidator = require("./validations/body-validator");
 
-const parsedBody = jsonParser({
+const parsedBodyInfrastructure = jsonParser({
     httpResponseType
 });
 
@@ -13,14 +13,14 @@ const bodySchemaRepository = BodyRepository({
     schema
 });
 
-const validatedBody = bodyValidator({
+const validatedBodyRepository = bodyValidator({
     httpResponseType,
     bodySchemaRepository
 });
 
 const interfaceInfrastructure = Object.freeze({
-    parsedBody,
-    validatedBody
+    parsedBodyInfrastructure,
+    validatedBodyRepository
 });
 
 module.exports = interfaceInfrastructure;

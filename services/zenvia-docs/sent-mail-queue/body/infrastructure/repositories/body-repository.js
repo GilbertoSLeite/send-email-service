@@ -3,7 +3,7 @@ const BodyRepository = ({
     schema
 }) => async (context, body) => {
     try {
-        const { error } = await schema.validateAsync(body);
+        const { error } = await schema.validate(body);
         if (error) {
           const detailsError = error.details.map(detail => detail.message).join(', ');
           const errorResponse = httpResponseType().unprocessableEntity(detailsError);

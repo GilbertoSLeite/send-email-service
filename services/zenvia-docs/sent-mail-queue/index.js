@@ -6,7 +6,7 @@ const { bodyView } = require('./body/interface/interface-body');
 module.exports.handler = async (event, context) => {
   try {    
     const returnValidatedBody = await bodyView(context, event.body);
-    const responseQueue = httpResponseType().ok(sentQueue);
+    const responseQueue = httpResponseType().ok(returnValidatedBody);
     return context.succeed(responseQueue);    
   }
   catch (error) {

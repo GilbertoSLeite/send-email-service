@@ -1,11 +1,13 @@
-const bodyEntity = (body) => Object.freeze({
-    hashid: body.hashid,
-	sendDate: body.sendDate,
-	from: body.from,
-	to: body.to,
-	contents: body.contents,
-	attachment: body.attachment,
-    environment: body.environment
-});
-
-module.exports = bodyEntity;
+class bodyEntity {
+	constructor(hashid, sendDate, from, to, contents, attachment, environment) {
+	  this.hashid = hashid;
+	  this.sendDate = sendDate;
+	  this.from = from;
+	  this.to = to;
+	  this.contents = contents;
+	  this.attachment = attachment;
+	  this.environment = environment;
+	}
+  }
+  
+  module.exports = bodyEntity;
