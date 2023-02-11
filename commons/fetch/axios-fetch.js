@@ -7,12 +7,12 @@ const axiosRequest = ({
     return response.data;
   } catch (error) {
     const errorResponse = {
-        '400': httpResponseType.badRequest,
-        '404': httpResponseType.notFound,
-        '500': httpResponseType.internalServerError,
+        '400': httpResponseType().badRequest,
+        '404': httpResponseType().notFound,
+        '500': httpResponseType().internalServerError,
       };
       const status = (error.response ? error.response.status : 500);
-      const handler = (errorResponse[status] || httpResponseType.internalServerError);
+      const handler = (errorResponse[status] || httpResponseType().internalServerError);
       return context.succeed(handler(error.response ? error.response.data : error.message));
   }
 };

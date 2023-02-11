@@ -11,7 +11,7 @@ const fetchData = ({
       context: Joi.any().required(),
       useAxios: Joi.bool().required(),
       api: Joi.string().uri().allow('').required(),
-      method: Joi.string().valid('get', 'post', 'put', 'delete').required(),
+      method: Joi.string().valid('get', 'post', 'put', 'delete'),
       bodyRequest: Joi.object(),
       headers: Joi.object()
     });
@@ -32,8 +32,7 @@ const fetchData = ({
 
     const response =  (useAxios ? await makeRequestWithAxios(context, options) : await makeRequestWithNodeFetch(context, options));
     return response;
-  }
-  catch (error) {
+  }  catch (error) {
     const errorResponse = httpResponseType().internalServerError(error.message);
     return context.succeed(errorResponse);
   }

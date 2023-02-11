@@ -6,6 +6,7 @@
   "scripts": {
     "start": "serverless offline start",
     "test:log": "mocha --recursive",
+    "test:integration": "mocha --grep index.test.js",
     "test": "mocha --recursive --require mocha-suppress-logs",
     "lintWin": "./node_modules/.bin/eslint **/*.js",
     "lint": "eslint '**/*.js?(x)'",
@@ -41,6 +42,7 @@
     "nock": "^13.3.0",
     "nyc": "^15.1.0",
     "serverless": "^3.23.0",
+    "winston": "^3.8.2",
     "yup": "^0.32.11"
   },
   "devDependencies": {

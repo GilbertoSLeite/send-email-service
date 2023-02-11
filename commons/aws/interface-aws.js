@@ -5,19 +5,20 @@ const getFileParse = require('./download-s3');
 const kmsDecrypt = require('./kms-decrypt');
 const awsSecrets = require('./aws-secrets');
 const awsFeature = require('./aws-feature');
+const logRequest = require('../logger/logger-center');
 
-const descriptografarDadosS3 = kmsDecrypt({ awsFeature, httpResponseType });
-const enviarS3 = uploadFileS3({ awsFeature, httpResponseType });
-const enviarParaFilaSQS = sentMailQueue({ awsFeature,  httpResponseType });
-const baixarDadosS3 = getFileParse({ awsFeature, httpResponseType });
+const decryptDataS3 = kmsDecrypt({ awsFeature, logRequest,  httpResponseType });
+const downloadDataS3 = getFileParse({ awsFeature, httpResponseType, logRequest });
 const gettingSecretsOnAws = awsSecrets({ awsFeature, httpResponseType });
+const sendS3 = uploadFileS3({ awsFeature, httpResponseType, logRequest });
+const sendToSQSQueue = sentMailQueue({ awsFeature, httpResponseType, gettingSecretsOnAws, logRequest });
 
-const interfaceAWS = Object.freeze({
-  baixarDadosS3,
+const interfaceAWS = Object.freeze({downloadDataS3,
+  decryptDataS3,
+  downloadDataS3,
   gettingSecretsOnAws,
-  descriptografarDadosS3,
-  enviarParaFilaSQS,
-  enviarS3,
+  sendS3,
+  sendToSQSQueue,
 });
 
 module.exports = interfaceAWS;

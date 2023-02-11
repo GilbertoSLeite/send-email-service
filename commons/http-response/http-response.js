@@ -1,45 +1,82 @@
 const httpResponse = ({
-    httpStatusResponse
+    httpStatusResponse,
+    logRequest
 }) => () => ({
-    forbidden: (message) =>  {
+    forbidden: (message, request) =>  {
         const statusCode = 403;
         const stringifyMessage = JSON.stringify(message, null, 2);
         const response = httpStatusResponse(statusCode, stringifyMessage);
+        const finalResponse = {
+            statusCode: response.statusCode,
+            headers: response.headers,
+            body: message            
+        };
+        logRequest('warn', request, finalResponse);
         return response; 
     },
 
-    notFound: (message) =>  {
+    notFound: (message, request) =>  {
         const statusCode = 404;
         const stringifyMessage = JSON.stringify(message, null, 2);
         const response = httpStatusResponse(statusCode, stringifyMessage);
+        const finalResponse = {
+            statusCode: response.statusCode,
+            headers: response.headers,
+            body: message            
+        };
+        logRequest('error', request, finalResponse);
         return response; 
     },
 
-    unprocessableEntity: (message) =>  {
+    unprocessableEntity: (message, request) =>  {
         const statusCode = 422;
         const stringifyMessage = JSON.stringify(message, null, 2);
         const response = httpStatusResponse(statusCode, stringifyMessage);
+        const finalResponse = {
+            statusCode: response.statusCode,
+            headers: response.headers,
+            body: message            
+        };
+        logRequest('warn', request, finalResponse);
         return response; 
     },
 
-    badRequest: (message) =>  {
+    badRequest: (message, request) =>  {
         const statusCode = 400;
         const stringifyMessage = JSON.stringify(message, null, 2);
         const response = httpStatusResponse(statusCode, stringifyMessage);
+        const finalResponse = {
+            statusCode: response.statusCode,
+            headers: response.headers,
+            body: message            
+        };
+        logRequest('error', request, finalResponse);
         return response; 
     },
 
-    ok: (message) =>  {
+    ok: (message, request) =>  {
         const statusCode = 200;
         const stringifyMessage = JSON.stringify(message, null, 2);
         const response = httpStatusResponse(statusCode, stringifyMessage);
+        const finalResponse = {
+            statusCode: response.statusCode,
+            headers: response.headers,
+            body: message            
+        };
+        logRequest('info', request, finalResponse);
         return response; 
     },
 
-    internalServerError: (message) =>  {
+    internalServerError: (message, request) =>  {
         const statusCode = 500;
         const stringifyMessage = JSON.stringify(message, null, 2);
         const response = httpStatusResponse(statusCode, stringifyMessage);
+        const finalResponse = {
+            statusCode: response.statusCode,
+            headers: response.headers,
+            body: message            
+        };
+        logRequest('error', request, finalResponse);
         return response; 
     },
 
